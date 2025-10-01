@@ -10,6 +10,8 @@ phases:
       - REPO_NAME=brain-tasks-app
       - IMAGE_URI=$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:latest
       - aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
+      - echo Logging in to Docker Hub...
+      - echo $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USERNAME --password-stdin
   build:
     commands:
       - echo Build started on `date`
