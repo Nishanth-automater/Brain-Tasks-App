@@ -3,7 +3,7 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo Logging in to Amazon ECR...
+      - echo Logging in to Amazon ECR....
       - ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
       - REGION=$AWS_DEFAULT_REGION
       - REPO_NAME=brain-task-repo
