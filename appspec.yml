@@ -1,11 +1,10 @@
 version: 0.0
-Resources:
-  - myApp:
-      Type: AWS::EKS::Application
-      Properties:
-        Name: brain-tasks-app
-        ClusterName: brain-task-cluster
-        Namespace: default
-
-        FileExistsBehavior: OVERWRITE
-
+os: linux
+files:
+  - source: /
+    destination: /home/ec2-user/brain-task-deploy
+hooks:
+  AfterInstall:
+    - location: scripts/deploy.sh
+      timeout: 600
+      runas: ec2-user
