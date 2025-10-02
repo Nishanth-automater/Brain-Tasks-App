@@ -31,3 +31,4 @@ artifacts:
   files:
     - k8s/*.yml
     - buildspec.yml
+    - appspec.yml
