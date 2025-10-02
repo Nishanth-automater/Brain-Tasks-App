@@ -4,14 +4,11 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws --version
       - ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
       - REGION=$AWS_DEFAULT_REGION
       - REPO_NAME=brain-task-repo
       - IMAGE_URI=$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:latest
       - aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
-      - echo Configuring kubeconfig for EKS...
-      - aws eks update-kubeconfig --region $REGION --name brain-task-cluster
       - echo Logging in to Docker Hub...
       - echo $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USERNAME --password-stdin
   build:
@@ -22,13 +19,13 @@ phases:
     commands:
       - echo Build completed on `date`
       - docker push $IMAGE_URI
-      - echo "Writing Kubernetes manifests..."
+      - echo "Updating image reference in manifests..."
       - sed -i "s|343075903534.dkr.ecr.us-east-1.amazonaws.com/brain-task-repo:latest|$IMAGE_URI|" k8s/deployment.yml
-      - kubectl apply -f k8s/deployment.yml
-      - kubectl apply -f k8s/service.yml
-
+      - echo "Listing artifacts to be sent to CodeDeploy:"
+      - ls -la
 artifacts:
   files:
+    - appspec.yml
+    - scripts/**
     - k8s/*.yml
     - buildspec.yml
-    - appspec.yml
