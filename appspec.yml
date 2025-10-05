@@ -2,9 +2,9 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ec2-user/brain-task-deploy
+    destination: /home/ubuntu/brain-task-deploy
 hooks:
   AfterInstall:
     - location: scripts/deploy.sh
       timeout: 600
-      runas: ec2-user
+      runas: ubuntu

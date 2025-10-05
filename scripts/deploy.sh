@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-WORKDIR="/home/ec2-user/brain-task-deploy"
+WORKDIR="/home/ubuntu/brain-task-deploy"
 
 echo "Deploy hook started at $(date)"
 cd "$WORKDIR"
