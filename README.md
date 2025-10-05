@@ -9,6 +9,7 @@ http://a66bd8d2dd8c54f3788495bd5fd71757-475823314.us-east-1.elb.amazonaws.com/
 https://docs.google.com/document/d/17T_Rj5tOm-_YJSZJgMpm3sGumFTwapQaQKKptEdQa08/edit?usp=sharing
 
 ==============================================================================
+
 Pipeline Flow summary:
 
 1️⃣ Source Stage → Pull code from GitHub
